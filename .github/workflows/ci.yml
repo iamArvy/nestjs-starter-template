@@ -24,11 +24,11 @@ jobs:
       - name: Enable Corepack and prepare pnpm
         run: |
           corepack enable
-          corepack prepare pnpm@9 --activate
+          corepack prepare pnpm@10 --activate
 
       - name: Install pnpm globally (fallback)
         run: |
-          npm install -g pnpm@9 || true
+          npm install -g pnpm@10 || true
           pnpm --version || true
 
       - name: Setup pnpm
