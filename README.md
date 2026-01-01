@@ -1,5 +1,5 @@
 [![CI](https://github.com/iamArvy/nestjs-starter-template/actions/workflows/ci.yml/badge.svg)](https://github.com/iamArvy/nestjs-starter-template/actions/workflows/ci.yml)
-[![Docker Image](https://img.shields.io/docker/pulls/iamArvy/nest-starter-template?logo=docker)](https://hub.docker.com/r/iamArvy/nest-starter-template)
+[![Docker Image](https://img.shields.io/docker/pulls/arvytechs/nest-starter-template?logo=docker)](https://hub.docker.com/r/arvytechs/nest-starter-template)
 
 # Nest Starter Template
 
