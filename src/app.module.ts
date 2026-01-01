@@ -1,0 +1,36 @@
+import { ClassSerializerInterceptor, Module } from '@nestjs/common';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { ConfigModule } from '@nestjs/config';
+import { config, validationSchema, winstonConfig } from './config';
+import { WinstonModule } from 'nest-winston';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { LoggingInterceptor } from './common/interceptors';
+import { DatabaseModule } from './database/database.module';
+import { UserModule } from './modules/user/user.module';
+
+@Module({
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: config,
+      validationSchema,
+    }),
+    WinstonModule.forRoot(winstonConfig),
+    DatabaseModule,
+    UserModule,
+  ],
+  controllers: [AppController],
+  providers: [
+    AppService,
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: LoggingInterceptor,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: ClassSerializerInterceptor,
+    },
+  ],
+})
+export class AppModule {}
