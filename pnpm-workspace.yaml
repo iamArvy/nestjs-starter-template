@@ -2,3 +2,7 @@ onlyBuiltDependencies:
   - '@nestjs/core'
   - '@scarf/scarf'
   - unrs-resolver
+
+# Define workspace packages. For a single-package repo include the root.
+packages:
+  - '.'
