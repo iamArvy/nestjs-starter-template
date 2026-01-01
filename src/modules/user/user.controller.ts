@@ -10,8 +10,6 @@ import {
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { ApiOkResponse, getSchemaPath } from '@nestjs/swagger';
-import { UserResponse } from './dto/user.dto';
 import { USER_CONTROLLER } from './constants';
 import * as docs from './docs';
 import * as dto from './dto';
@@ -23,8 +21,9 @@ export class UserController {
 
   @docs.CreateUserDocs()
   @Post()
-  create(@Body() createUserDto: dto.CreateUserDto) {
-    return this.userService.create(createUserDto);
+  async create(@Body() createUserDto: dto.CreateUserDto) {
+    const user = await this.userService.create(createUserDto);
+    return new dto.UserDto(user);
   }
 
   @docs.ListUserDocs()
@@ -33,13 +32,11 @@ export class UserController {
     return this.userService.findAll();
   }
 
-  @ApiOkResponse({
-    description: 'The user has been successfully retrieved.',
-    schema: { $ref: getSchemaPath(UserResponse) },
-  })
+  @docs.GetUserDocs()
   @Get(':id')
-  findOne(@Param('id', ParseUUIDPipe) id: string) {
-    return this.userService.findOne(+id);
+  async findOne(@Param('id', ParseUUIDPipe) id: string) {
+    const user = await this.userService.findOne(id);
+    return new dto.UserDto(user);
   }
 
   @docs.UpdateUserDocs()
@@ -48,12 +45,12 @@ export class UserController {
     @Param('id', ParseUUIDPipe) id: string,
     @Body() updateUserDto: UpdateUserDto,
   ) {
-    return this.userService.update(+id, updateUserDto);
+    return this.userService.update(id, updateUserDto);
   }
 
   @docs.DeleteUserDocs()
   @Delete(':id')
   remove(@Param('id', ParseUUIDPipe) id: string) {
-    return this.userService.remove(+id);
+    return this.userService.remove(id);
   }
 }

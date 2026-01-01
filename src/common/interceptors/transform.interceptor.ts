@@ -55,6 +55,42 @@ export class TransformInterceptor implements NestInterceptor {
           return response;
         }
 
+        // Accept objects that already have `data` (and optional `meta`) as an API
+        // envelope even if `status_code`/`message` are not present. This allows
+        // services to return `{ data, meta }` and keep `data` as an array.
+        if (
+          result &&
+          typeof result === 'object' &&
+          !Array.isArray(result) &&
+          !(result instanceof Date) &&
+          'data' in (result as Record<string, unknown>)
+        ) {
+          const resultObj = result as Record<string, unknown> & {
+            meta?: unknown;
+          };
+          const responseObj = ctx
+            .switchToHttp()
+            .getResponse<{ statusCode?: number }>();
+          const httpStatusCode: number =
+            typeof responseObj?.statusCode === 'number'
+              ? responseObj.statusCode
+              : 200;
+
+          const response: Record<string, unknown> = {
+            status_code:
+              typeof resultObj.status_code === 'number'
+                ? resultObj.status_code
+                : httpStatusCode,
+            message:
+              typeof resultObj.message === 'string' ? resultObj.message : null,
+            data: resultObj.data ?? null,
+          };
+          if (resultObj.meta !== undefined) {
+            response.meta = resultObj.meta;
+          }
+          return response;
+        }
+
         const response = ctx
           .switchToHttp()
           .getResponse<{ statusCode?: number }>();

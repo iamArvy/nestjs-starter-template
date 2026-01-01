@@ -29,20 +29,25 @@ export function createApiArrayResponseDto<T>(dataType: Type<T>) {
   return ApiArrayResponseDto;
 }
 export function createApiPaginatedResponseDto<T>(dataType: Type<T>) {
-  class PaginatedDataDto {
-    @ApiProperty({ type: [dataType] })
-    items: T[];
-
+  class PaginationMetaDto {
     @ApiProperty({ example: 0 })
     total: number;
 
     @ApiProperty({ example: 0 })
-    page: number;
+    limit?: number;
 
     @ApiProperty({ example: 0 })
-    pageSize: number;
-  }
+    page?: number;
 
+    @ApiProperty({ example: 0 })
+    total_pages?: number;
+
+    @ApiProperty({ example: true })
+    has_next?: boolean;
+
+    @ApiProperty({ example: false })
+    has_prev?: boolean;
+  }
   class ApiPaginatedResponseDto {
     @ApiProperty({ example: 200 })
     status_code: number;
@@ -50,8 +55,11 @@ export function createApiPaginatedResponseDto<T>(dataType: Type<T>) {
     @ApiProperty({ nullable: true })
     message: string | null;
 
-    @ApiProperty({ type: PaginatedDataDto })
-    data: PaginatedDataDto;
+    @ApiProperty({ type: [dataType] })
+    data: T[];
+
+    @ApiProperty({ type: PaginationMetaDto })
+    meta: PaginationMetaDto;
   }
   return ApiPaginatedResponseDto;
 }

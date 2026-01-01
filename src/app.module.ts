@@ -5,7 +5,10 @@ import { ConfigModule } from '@nestjs/config';
 import { config, validationSchema, winstonConfig } from './config';
 import { WinstonModule } from 'nest-winston';
 import { APP_INTERCEPTOR } from '@nestjs/core';
-import { LoggingInterceptor } from './common/interceptors';
+import {
+  LoggingInterceptor,
+  TransformInterceptor,
+} from './common/interceptors';
 import { DatabaseModule } from './database/database.module';
 import { UserModule } from './modules/user/user.module';
 
@@ -30,6 +33,10 @@ import { UserModule } from './modules/user/user.module';
     {
       provide: APP_INTERCEPTOR,
       useClass: ClassSerializerInterceptor,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: TransformInterceptor,
     },
   ],
 })

@@ -1,6 +1,7 @@
 import { SoftDeleteEntity } from 'src/database/entities';
-import { Column } from 'typeorm';
+import { Column, Entity } from 'typeorm';
 
+@Entity()
 export class User extends SoftDeleteEntity {
   @Column()
   name: string;
