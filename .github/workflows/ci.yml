@@ -27,6 +27,11 @@ jobs:
           corepack enable
           corepack prepare pnpm@8 --activate
 
+      - name: Install pnpm globally (fallback)
+        run: |
+          npm install -g pnpm@8 || true
+          pnpm --version || true
+
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
