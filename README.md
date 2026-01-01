@@ -1,98 +1,158 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+[![CI](https://github.com/iamArvy/nestjs-starter-template/actions/workflows/ci.yml/badge.svg)](https://github.com/iamArvy/nestjs-starter-template/actions/workflows/ci.yml)
+[![Docker Image](https://img.shields.io/docker/pulls/iamArvy/nest-starter-template?logo=docker)](https://hub.docker.com/r/iamArvy/nest-starter-template)
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# Nest Starter Template
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Opinionated starter template for building APIs with NestJS, TypeScript, pnpm, and TypeORM.
 
-## Description
+This repository includes common building blocks useful for production services:
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- Structured logging (winston)
+- API response interceptor and DTO helpers
+- Centralized config using `@nestjs/config`
+- Example `User` module with controller, service, repository, DTOs, and tests
+- GitHub Actions CI workflow (`.github/workflows/ci.yml`)
+- Dockerfile and CD workflow to publish images to GHCR (`.github/workflows/docker-deploy.yml`)
 
-## Project setup
+---
+
+## Quickstart
+
+Prerequisites:
+
+- Node.js 18+ or 20+
+- pnpm
+
+Install dependencies:
 
 ```bash
-$ pnpm install
+pnpm install
 ```
 
-## Compile and run the project
+Run in development:
 
 ```bash
-# development
-$ pnpm run start
-
-# watch mode
-$ pnpm run start:dev
-
-# production mode
-$ pnpm run start:prod
+pnpm run start:dev
 ```
 
-## Run tests
+Build for production:
 
 ```bash
-# unit tests
-$ pnpm run test
-
-# e2e tests
-$ pnpm run test:e2e
-
-# test coverage
-$ pnpm run test:cov
+pnpm run build
+pnpm run start:prod
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+Run tests:
 
 ```bash
-$ pnpm install -g @nestjs/mau
-$ mau deploy
+pnpm run test        # unit tests
+pnpm run test:e2e    # e2e tests (if configured)
+pnpm run test:cov    # coverage
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+Lint and format:
 
-## Resources
+```bash
+pnpm run lint
+pnpm run format
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+---
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+## Environment
 
-## Support
+Create a copy of `.env.example` named `.env` and update values for your environment.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Example:
 
-## Stay in touch
+```bash
+cp .env.example .env
+# edit .env and fill secrets
+```
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+The project reads configuration via `@nestjs/config` and expects typical vars such as `DATABASE_URL`, `PORT`, and `JWT_SECRET` (see `.env.example`).
 
-## License
+---
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+## Docker
+
+Build locally:
+
+```bash
+docker build -t nest-starter-template:local .
+```
+
+Run container:
+
+```bash
+docker run --rm -p 3000:3000 --env-file .env nest-starter-template:local
+```
+
+Notes:
+
+- The repository includes a multi-stage `Dockerfile` and a `.dockerignore` to keep the image small.
+- The GitHub Actions workflow at `.github/workflows/docker-deploy.yml` builds and pushes images to GitHub Container Registry (GHCR) on pushes to `main`/`master`.
+
+If you want Docker Hub instead, replace the registry/login steps in the workflow with Docker Hub credentials stored as repository secrets.
+
+---
+
+## Continuous Integration
+
+- A CI workflow is provided at `.github/workflows/ci.yml`.
+- It runs on Node 18 and 20, installs via pnpm, lints, builds, and runs tests.
+- You can extend the workflow to run coverage reports, security scans (e.g., Snyk), or publish artifacts.
+
+---
+
+## Project layout
+
+Typical structure:
+
+```
+src/
+  app.module.ts
+  main.ts
+  common/          # interceptors, decorators, DTO helpers
+  config/          # configuration and environment handling
+  database/        # TypeORM entities & module
+  modules/
+    user/          # example feature module
+test/              # e2e test configuration
+Dockerfile
+.github/workflows/
+```
+
+---
+
+## Testing notes
+
+- Unit tests use Jest and `@nestjs/testing`.
+- The project uses `ts-jest` and the Jest config lives in `package.json` (root) and sets `rootDir` to `src` so tests import using relative paths or the `src/` alias.
+- In CI, ensure environment variables required by tests (DB connection strings, etc.) are provided via secrets or mocked providers.
+
+---
+
+## Conventions and recommendations
+
+- Keep controllers thin; business logic belongs in services.
+- Use DTOs + `class-transformer` for response shaping and validation.
+- Centralize environment config in `src/config` and validate using Joi schemas.
+- Use interceptors for consistent response envelopes and error formatting.
+- Add a `PaginatedDto<T>` and consistent pagination approach for list endpoints.
+
+---
+
+## Next improvements (suggested)
+
+- Add a `.env.example` and a documented config section
+- Add migration tooling and seed scripts for the DB
+- Add health and metrics endpoints (Prometheus)
+- Add OpenTelemetry tracing and correlation IDs
+- Add Husky pre-commit hooks for linting/format checks
+
+---
+
+## Contributing
+
+Contributions welcome. Open an issue or PR with your proposed change.

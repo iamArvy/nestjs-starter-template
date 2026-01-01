@@ -8,6 +8,8 @@
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "prepare": "husky install",
+    "precommit": "pnpm lint-staged",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
@@ -51,7 +53,9 @@
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.2.2",
     "globals": "^16.0.0",
+    "husky": "^9.1.7",
     "jest": "^30.0.0",
+    "lint-staged": "^16.2.7",
     "morgan": "^1.10.1",
     "prettier": "^3.4.2",
     "source-map-support": "^0.5.21",
@@ -62,6 +66,20 @@
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.20.0"
+  },
+  "husky": {
+    "hooks": {}
+  },
+  "lint-staged": {
+    "src/**/*.{ts,js}": [
+      "pnpm run format",
+      "pnpm run lint -- --fix",
+      "git add"
+    ],
+    "*.{json,md}": [
+      "pnpm run format",
+      "git add"
+    ]
   },
   "jest": {
     "moduleFileExtensions": [
