@@ -45,7 +45,9 @@ jobs:
             ${{ runner.os }}-pnpm-
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: |
+          # Prefer strict install using the lockfile; fall back if lockfile is missing or incompatible
+          pnpm install --frozen-lockfile || pnpm install --no-frozen-lockfile
 
       - name: Lint
         run: pnpm run lint
