@@ -9,10 +9,13 @@ import {
 import { SwaggerModule } from '@nestjs/swagger';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { MetricsMiddleware } from './modules/metrics/metrics.middleware';
+import { ConfigService } from '@nestjs/config';
+import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
 
 async function bootstrap() {
   const { name, isDev, env, port, url, prefix } = appConfig();
   const app = await NestFactory.create(AppModule);
+  const config = app.get(ConfigService);
 
   // Global Interceptors
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
@@ -29,7 +32,8 @@ async function bootstrap() {
   app.use((req, res, next) => new MetricsMiddleware().use(req, res, next));
 
   // CORS
-  app.enableCors();
+  const corsOptions = config.getOrThrow<CorsOptions>('cors');
+  app.enableCors(corsOptions);
 
   // Global Prefix
   app.setGlobalPrefix(prefix, { exclude: [swaggerConfig.path] });
