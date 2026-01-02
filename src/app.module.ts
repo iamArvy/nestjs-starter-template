@@ -11,6 +11,8 @@ import {
 } from './common/interceptors';
 import { DatabaseModule } from './database/database.module';
 import { UserModule } from './modules/user/user.module';
+import { HealthModule } from './modules/health/health.module';
+import { MetricsModule } from './modules/metrics/metrics.module';
 
 @Module({
   imports: [
@@ -22,6 +24,8 @@ import { UserModule } from './modules/user/user.module';
     WinstonModule.forRoot(winstonConfig),
     DatabaseModule,
     UserModule,
+    HealthModule,
+    MetricsModule,
   ],
   controllers: [AppController],
   providers: [

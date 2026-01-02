@@ -146,12 +146,10 @@ Dockerfile
 ## Next improvements (suggested)
 
 - Add migration tooling and seed scripts for the DB
-- Add health and metrics endpoints (Prometheus)
 - Add OpenTelemetry tracing and correlation IDs
-Security hardening: Helmet, strict CORS, CSP, input sanitization, and dependency scanners.
-Caching: Redis cache wrappers/decorators with examples and cache invalidation notes.
-Observability: Correlation IDs, structured logs (winston), and optional OpenTelemetry traces.
-Developer DX: Prettier/ESLint, Husky pre-commit hooks, expanded README with quickstart.
+- Security hardening: Helmet, strict CORS, CSP, input sanitization, and dependency scanners.
+- Caching: Redis cache wrappers/decorators with examples and cache invalidation notes.
+- Developer DX: Prettier/ESLint, Husky pre-commit hooks, expanded README with quickstart.
 ---
 
 ## Contributing

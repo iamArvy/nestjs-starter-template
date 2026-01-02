@@ -8,6 +8,7 @@ import {
 } from '@nestjs/common';
 import { SwaggerModule } from '@nestjs/swagger';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
+import { MetricsMiddleware } from './modules/metrics/metrics.middleware';
 
 async function bootstrap() {
   const { name, isDev, env, port, url, prefix } = appConfig();
@@ -23,6 +24,9 @@ async function bootstrap() {
     SwaggerModule.createDocument(app, swaggerConfig.document),
     swaggerConfig.options,
   );
+
+  // Metrics Middleware
+  app.use((req, res, next) => new MetricsMiddleware().use(req, res, next));
 
   // CORS
   app.enableCors();
