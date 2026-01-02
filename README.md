@@ -145,12 +145,13 @@ Dockerfile
 
 ## Next improvements (suggested)
 
-- Add a `.env.example` and a documented config section
 - Add migration tooling and seed scripts for the DB
 - Add health and metrics endpoints (Prometheus)
 - Add OpenTelemetry tracing and correlation IDs
-- Add Husky pre-commit hooks for linting/format checks
-
+Security hardening: Helmet, strict CORS, CSP, input sanitization, and dependency scanners.
+Caching: Redis cache wrappers/decorators with examples and cache invalidation notes.
+Observability: Correlation IDs, structured logs (winston), and optional OpenTelemetry traces.
+Developer DX: Prettier/ESLint, Husky pre-commit hooks, expanded README with quickstart.
 ---
 
 ## Contributing
