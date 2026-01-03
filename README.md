@@ -147,7 +147,6 @@ Dockerfile
 
 - Add migration tooling and seed scripts for the DB
 - Add OpenTelemetry tracing and correlation IDs
-- Security hardening: Helmet, strict CORS, CSP, input sanitization, and dependency scanners.
 - Caching: Redis cache wrappers/decorators with examples and cache invalidation notes.
 - Developer DX: Prettier/ESLint, Husky pre-commit hooks, expanded README with quickstart.
 ---

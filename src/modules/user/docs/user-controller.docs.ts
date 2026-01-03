@@ -1,7 +1,8 @@
 import { applyDecorators } from '@nestjs/common';
 import { ApiExtraModels, ApiTags } from '@nestjs/swagger';
-import { UserDto, UserResponse } from '../dto';
+
 import { USER_CONTROLLER } from '../constants';
+import { UserDto, UserResponse } from '../dto';
 
 export const UserControllerDocs = () => {
   return applyDecorators(

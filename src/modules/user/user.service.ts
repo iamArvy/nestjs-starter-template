@@ -1,9 +1,11 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { plainToInstance } from 'class-transformer';
+import * as sysMsg from 'src/common/system-messages';
+
+import * as dto from './dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserRepository } from './user.repository';
-import * as dto from './dto';
-import * as sysMsg from 'src/common/system-messages';
-import { plainToInstance } from 'class-transformer';
+
 @Injectable()
 export class UserService {
   constructor(private readonly userRepository: UserRepository) {}

@@ -1,13 +1,14 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication, ValidationPipe } from '@nestjs/common';
-import request from 'supertest';
-import { AppModule } from '../src/app.module';
 import { Server } from 'http';
+
+import { INestApplication, ValidationPipe } from '@nestjs/common';
+import { Test, TestingModule } from '@nestjs/testing';
+import request from 'supertest';
+
+import { AppModule } from '../src/app.module';
 
 describe('App (e2e)', () => {
   let app: INestApplication;
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   const getServer = () => app.getHttpServer() as Server;
 
   beforeAll(async () => {

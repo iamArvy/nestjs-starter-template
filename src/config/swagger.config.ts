@@ -1,9 +1,11 @@
+import { registerAs } from '@nestjs/config';
 import { DocumentBuilder } from '@nestjs/swagger';
+
 import { appConfig } from './app.config';
 
 const { name, version } = appConfig();
 
-export const swaggerConfig = {
+export const swaggerConfig = registerAs('swagger', () => ({
   document: new DocumentBuilder()
     .setTitle(name)
     .setDescription('FullstackEdge E-commerce API')
@@ -24,4 +26,6 @@ export const swaggerConfig = {
     swaggerOptions: { persistAuthorization: true },
     jsonDocumentUrl: 'swagger/json',
   },
-};
+}));
+
+export type ISwaggerConfig = ReturnType<typeof swaggerConfig>;

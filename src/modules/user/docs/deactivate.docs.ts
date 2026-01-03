@@ -5,6 +5,7 @@ import {
   ApiOkResponse,
   ApiOperation,
 } from '@nestjs/swagger';
+
 import { USER_ENDPOINTS } from '../constants';
 
 export const DeactivateUserDocs = () => {

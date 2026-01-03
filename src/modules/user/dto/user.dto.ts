@@ -1,10 +1,11 @@
-import { Exclude, Expose } from 'class-transformer';
-import { User } from '../entities';
 import { ApiProperty } from '@nestjs/swagger';
+import { Exclude, Expose } from 'class-transformer';
 import {
   createApiPaginatedResponseDto,
   createApiResponseDto,
 } from 'src/common/dto/api-response.dto';
+
+import { User } from '../entities';
 
 @Exclude()
 export class UserDto implements Partial<User> {

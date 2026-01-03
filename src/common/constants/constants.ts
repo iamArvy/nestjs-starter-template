@@ -1,6 +1,6 @@
 export const DEFAULTS = {
-  ITEMS_PER_PAGE: 20,
-  MAX_PAGE_SIZE: 100,
+  items_per_page: 20,
+  max_page_size: 100,
 } as const;
 
 export type Defaults = typeof DEFAULTS;

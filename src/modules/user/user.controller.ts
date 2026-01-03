@@ -8,11 +8,12 @@ import {
   Delete,
   ParseUUIDPipe,
 } from '@nestjs/common';
-import { UserService } from './user.service';
-import { UpdateUserDto } from './dto/update-user.dto';
+
 import { USER_CONTROLLER } from './constants';
 import * as docs from './docs';
 import * as dto from './dto';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { UserService } from './user.service';
 
 @docs.UserControllerDocs()
 @Controller(USER_CONTROLLER.basePath)

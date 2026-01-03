@@ -1,9 +1,9 @@
+import * as joi from 'joi';
 import {
   utilities as nestWinstonModuleUtilities,
   WinstonModuleOptions,
 } from 'nest-winston';
 import * as winston from 'winston';
-import * as Joi from 'joi';
 
 export const winstonConfig: WinstonModuleOptions = {
   level: process.env.LOG_LEVEL!,
@@ -31,6 +31,6 @@ export const winstonConfig: WinstonModuleOptions = {
   ],
 };
 
-export const winstonValidation = Joi.object({
-  LOG_LEVEL: Joi.string().default('info'),
+export const winstonValidation = joi.object({
+  LOG_LEVEL: joi.string().default('info'),
 });

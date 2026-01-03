@@ -1,8 +1,8 @@
 export const MESSAGES = {
-  USER_NOT_FOUND: 'User not found',
-  INVALID_TOKEN: 'Invalid authentication token',
-  WELCOME: 'Welcome, {name}!',
-  INTERNAL_ERROR: 'An internal error occurred',
+  user_not_found: 'User not found',
+  invalid_token: 'Invalid authentication token',
+  welcome: 'Welcome, {name}!',
+  internal_error: 'An internal error occurred',
 } as const;
 
 export type MessageKey = keyof typeof MESSAGES;

@@ -1,7 +1,8 @@
-import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { appConfig } from './app.config';
-import Joi from 'joi';
 import { registerAs } from '@nestjs/config';
+import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import joi from 'joi';
+
+import { appConfig } from './app.config';
 
 const { isDev, isProd, isStaging } = appConfig();
 
@@ -37,10 +38,10 @@ export const dbConfig = registerAs(
   }),
 );
 
-export const dbValidation = Joi.object({
-  DB_HOST: Joi.string().required(),
-  DB_PORT: Joi.number().required(),
-  DB_USER: Joi.string().required(),
-  DB_PASS: Joi.string().required(),
-  DB_NAME: Joi.string().required(),
+export const dbValidation = joi.object({
+  DB_HOST: joi.string().required(),
+  DB_PORT: joi.number().required(),
+  DB_USER: joi.string().required(),
+  DB_PASS: joi.string().required(),
+  DB_NAME: joi.string().required(),
 });

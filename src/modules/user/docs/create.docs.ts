@@ -1,13 +1,14 @@
 import { applyDecorators } from '@nestjs/common';
-import { USER_ENDPOINTS } from '../constants';
 import {
   ApiBadRequestResponse,
   ApiConflictResponse,
   ApiCreatedResponse,
   ApiOperation,
 } from '@nestjs/swagger';
-import { UserResponse } from '../dto';
 import * as sysMsg from 'src/common/system-messages';
+
+import { USER_ENDPOINTS } from '../constants';
+import { UserResponse } from '../dto';
 
 export const CreateUserDocs = () => {
   return applyDecorators(

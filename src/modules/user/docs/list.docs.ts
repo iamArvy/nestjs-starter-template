@@ -1,6 +1,7 @@
 import { applyDecorators } from '@nestjs/common';
-import { USER_ENDPOINTS } from '../constants';
 import { ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+
+import { USER_ENDPOINTS } from '../constants';
 import { ListUserResponse } from '../dto';
 
 export const ListUserDocs = () => {

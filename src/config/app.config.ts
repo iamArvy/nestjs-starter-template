@@ -1,5 +1,5 @@
 import { registerAs } from '@nestjs/config';
-import * as Joi from 'joi';
+import * as joi from 'joi';
 
 export interface IAppConfig {
   env: 'development' | 'staging' | 'production' | 'test';
@@ -9,7 +9,7 @@ export interface IAppConfig {
   slug: string;
   host: string;
   url: string;
-  prefix?: string;
+  prefix: string;
   version: string;
   description?: string;
 }
@@ -33,16 +33,17 @@ export const appConfig = registerAs('app', () => ({
   description: process.env.APP_DESCRIPTION,
 }));
 
-export const appValidation = Joi.object({
-  NODE_ENV: Joi.string()
+export const appValidation = joi.object({
+  NODE_ENV: joi
+    .string()
     .valid('development', 'staging', 'production', 'test')
     .default('development'),
-  PORT: Joi.number().default(3000),
-  APP_NAME: Joi.string().default('Nest Application'),
-  APP_SLUG: Joi.string().default('nest-application'),
-  APP_HOST: Joi.string().default('localhost'),
-  APP_URL: Joi.string().uri().default('http://localhost:3000'),
-  APP_PREFIX: Joi.string().allow('').optional(),
-  APP_VERSION: Joi.string().default('v1'),
-  APP_DESCRIPTION: Joi.string().allow('').optional(),
+  PORT: joi.number().default(3000),
+  APP_NAME: joi.string().default('Nest Application'),
+  APP_SLUG: joi.string().default('nest-application'),
+  APP_HOST: joi.string().default('localhost'),
+  APP_URL: joi.string().uri().default('http://localhost:3000'),
+  APP_PREFIX: joi.string().allow('').optional(),
+  APP_VERSION: joi.string().default('v1'),
+  APP_DESCRIPTION: joi.string().allow('').optional(),
 });

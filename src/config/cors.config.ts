@@ -1,6 +1,6 @@
 import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
 import { registerAs } from '@nestjs/config';
-import * as Joi from 'joi';
+import * as joi from 'joi';
 
 export const corsConfig = registerAs(
   'cors',
@@ -14,6 +14,6 @@ export const corsConfig = registerAs(
   }),
 );
 
-export const corsValidation = Joi.object({
-  CORS_ORIGINS: Joi.string().optional(),
+export const corsValidation = joi.object({
+  CORS_ORIGINS: joi.string().optional(),
 });

@@ -1,45 +1,54 @@
-import { NestFactory, Reflector } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { appConfig, swaggerConfig, validationConfig } from './config';
 import {
   ClassSerializerInterceptor,
   LoggerService,
   ValidationPipe,
 } from '@nestjs/common';
-import { SwaggerModule } from '@nestjs/swagger';
-import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
-import { MetricsMiddleware } from './modules/metrics/metrics.middleware';
-import { ConfigService } from '@nestjs/config';
 import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
+import { ConfigService } from '@nestjs/config';
+import { NestFactory, Reflector } from '@nestjs/core';
+import { SwaggerModule } from '@nestjs/swagger';
+import { NextFunction, Request, Response } from 'express';
+import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
+
+import { AppModule } from './app.module';
+import { IAppConfig, ISwaggerConfig, IValidationConfig } from './config';
+import { MetricsMiddleware } from './modules/metrics/metrics.middleware';
 
 async function bootstrap() {
-  const { name, isDev, env, port, url, prefix } = appConfig();
   const app = await NestFactory.create(AppModule);
   const config = app.get(ConfigService);
+  const { name, isDev, env, port, url, prefix } =
+    config.getOrThrow<IAppConfig>('app');
 
   // Global Interceptors
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
 
   // Swagger Docs
+  const { path, options, document } =
+    config.getOrThrow<ISwaggerConfig>('swagger');
+
   SwaggerModule.setup(
-    swaggerConfig.path,
+    path,
     app,
-    SwaggerModule.createDocument(app, swaggerConfig.document),
-    swaggerConfig.options,
+    SwaggerModule.createDocument(app, document),
+    options,
   );
 
   // Metrics Middleware
-  app.use((req, res, next) => new MetricsMiddleware().use(req, res, next));
+  app.use((req: Request, res: Response, next: NextFunction) =>
+    new MetricsMiddleware().use(req, res, next),
+  );
 
   // CORS
   const corsOptions = config.getOrThrow<CorsOptions>('cors');
   app.enableCors(corsOptions);
 
   // Global Prefix
-  app.setGlobalPrefix(prefix, { exclude: [swaggerConfig.path] });
+  app.setGlobalPrefix(prefix, { exclude: [path] });
 
   // Global Pipes
-  app.useGlobalPipes(new ValidationPipe(validationConfig.options));
+  const validationOptions = config.getOrThrow<IValidationConfig>('validation');
+  app.useGlobalPipes(new ValidationPipe(validationOptions));
 
   if (isDev) {
     // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-unsafe-call
@@ -61,4 +70,4 @@ async function bootstrap() {
     ` ${name} | ${env}`,
   );
 }
-bootstrap();
+void bootstrap();

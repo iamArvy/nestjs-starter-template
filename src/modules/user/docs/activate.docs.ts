@@ -5,8 +5,9 @@ import {
   ApiOkResponse,
   ApiOperation,
 } from '@nestjs/swagger';
-import { USER_ENDPOINTS } from '../constants';
 import * as sysMsg from 'src/common/system-messages';
+
+import { USER_ENDPOINTS } from '../constants';
 export const ActivateUserDocs = () => {
   return applyDecorators(
     ApiOperation({ summary: USER_ENDPOINTS.ACTIVATE.name }),
