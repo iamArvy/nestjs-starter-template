@@ -5,9 +5,8 @@ import {
   ApiCreatedResponse,
   ApiOperation,
 } from '@nestjs/swagger';
-import * as sysMsg from 'src/common/system-messages';
 
-import { USER_ENDPOINTS } from '../constants';
+import { USER_ENDPOINTS, USER_MESSAGES } from '../constants';
 import { UserResponse } from '../dto';
 
 export const CreateUserDocs = () => {
@@ -21,7 +20,7 @@ export const CreateUserDocs = () => {
       description: 'Invalid input or missing required fields',
     }),
     ApiConflictResponse({
-      description: sysMsg.USER_ALREADY_EXISTS,
+      description: USER_MESSAGES.alreadyExists,
     }),
   );
 };

@@ -1,9 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
-import * as sysMsg from 'src/common/system-messages';
 
+import { USER_MESSAGES } from './constants';
 import * as dto from './dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { UserRepository } from './user.repository';
 
 @Injectable()
@@ -23,7 +22,7 @@ export class UserService {
     });
     const items = plainToInstance(dto.UserDto, payload);
     return {
-      message: sysMsg.USERS_LISTED,
+      message: USER_MESSAGES.listed,
       data: items,
       meta: paginationMeta,
     };
@@ -32,24 +31,26 @@ export class UserService {
   async findOne(id: string) {
     const user = await this.userRepository.get({ identifierOptions: { id } });
     if (!user) {
-      throw new NotFoundException(sysMsg.USER_NOT_FOUND);
+      throw new NotFoundException(USER_MESSAGES.notFound);
     }
     return user;
   }
 
-  update(id: string, updateUserDto: UpdateUserDto) {
-    return this.userRepository.update({
+  async update(id: string, updateUserDto: dto.UpdateUserDto) {
+    await this.userRepository.update({
       identifierOptions: { id },
       updatePayload: updateUserDto,
       transactionOptions: { useTransaction: false },
     });
+    return { message: USER_MESSAGES.updated };
   }
 
-  remove(id: string) {
-    return this.userRepository.update({
+  async remove(id: string) {
+    await this.userRepository.update({
       identifierOptions: { id },
       updatePayload: { deleted_at: new Date() },
       transactionOptions: { useTransaction: false },
     });
+    return { message: USER_MESSAGES.deleted };
   }
 }

@@ -1,7 +1,4 @@
 export const MESSAGES = {
-  user_not_found: 'User not found',
-  invalid_token: 'Invalid authentication token',
-  welcome: 'Welcome, {name}!',
   internal_error: 'An internal error occurred',
 } as const;
 

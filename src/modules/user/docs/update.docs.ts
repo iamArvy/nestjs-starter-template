@@ -1,5 +1,4 @@
 import { applyDecorators } from '@nestjs/common';
-// import { INVENTORY_ENDPOINTS } from '../constants';
 import {
   ApiBadRequestResponse,
   ApiConflictResponse,
@@ -8,14 +7,14 @@ import {
   ApiOperation,
 } from '@nestjs/swagger';
 
-import { USER_ENDPOINTS } from '../constants';
+import { USER_ENDPOINTS, USER_MESSAGES } from '../constants';
 
 export const UpdateUserDocs = () => {
   return applyDecorators(
     ApiOperation({ summary: USER_ENDPOINTS.UPDATE.name }),
-    ApiOkResponse({ description: 'User updated successfully' }),
-    ApiNotFoundResponse({ description: 'User not found' }),
-    ApiConflictResponse({ description: 'User with sku exists' }),
+    ApiOkResponse({ description: USER_MESSAGES.updated }),
+    ApiNotFoundResponse({ description: USER_MESSAGES.notFound }),
+    ApiConflictResponse({ description: USER_MESSAGES.alreadyExists }),
     ApiBadRequestResponse({
       description: 'Invalid input or missing required fields',
     }),

@@ -5,16 +5,15 @@ import {
   ApiOkResponse,
   ApiOperation,
 } from '@nestjs/swagger';
-import * as sysMsg from 'src/common/system-messages';
 
-import { USER_ENDPOINTS } from '../constants';
+import { USER_ENDPOINTS, USER_MESSAGES } from '../constants';
 export const ActivateUserDocs = () => {
   return applyDecorators(
     ApiOperation({ summary: USER_ENDPOINTS.ACTIVATE.name }),
-    ApiOkResponse({ description: 'User activated successfully' }),
-    ApiNotFoundResponse({ description: sysMsg.USER_NOT_FOUND }),
+    ApiOkResponse({ description: USER_MESSAGES.activated }),
+    ApiNotFoundResponse({ description: USER_MESSAGES.notFound }),
     ApiBadRequestResponse({
-      description: sysMsg.USER_ALREADY_ACTIVE,
+      description: USER_MESSAGES.alreadyActive,
     }),
   );
 };

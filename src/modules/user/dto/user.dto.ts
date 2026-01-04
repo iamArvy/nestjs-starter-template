@@ -17,7 +17,7 @@ export class UserDto implements Partial<User> {
   @Expose()
   name: string;
 
-  @ApiProperty({ name: 'email_address' })
+  @ApiProperty({ name: 'email' })
   @Expose()
   email: string;
 

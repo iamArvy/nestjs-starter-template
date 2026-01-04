@@ -6,15 +6,15 @@ import {
   ApiOperation,
 } from '@nestjs/swagger';
 
-import { USER_ENDPOINTS } from '../constants';
+import { USER_ENDPOINTS, USER_MESSAGES } from '../constants';
 
 export const DeactivateUserDocs = () => {
   return applyDecorators(
     ApiOperation({ summary: USER_ENDPOINTS.DEACTIVATE.name }),
-    ApiOkResponse({ description: 'User deactivated successfully' }),
-    ApiNotFoundResponse({ description: 'User not found' }),
+    ApiOkResponse({ description: USER_MESSAGES.deactivated }),
+    ApiNotFoundResponse({ description: USER_MESSAGES.notFound }),
     ApiBadRequestResponse({
-      description: 'User already deactivated',
+      description: USER_MESSAGES.alreadyDeactivated,
     }),
   );
 };
