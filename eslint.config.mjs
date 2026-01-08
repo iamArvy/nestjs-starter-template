@@ -129,17 +129,4 @@ export default [
       'no-restricted-syntax': 'off',
     },
   },
-  {
-    files: ['src/**/*.dto.ts'],
-    rules: {
-      '@typescript-eslint/naming-convention': [
-        'error',
-        {
-          selector: 'property',
-          format: ['snake_case'],
-          leadingUnderscore: 'allow',
-        },
-      ],
-    },
-  },
 ];
